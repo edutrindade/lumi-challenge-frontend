@@ -5,7 +5,12 @@ import { FilterComponent } from '@/components/filter';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
 
-export const Header = () => {
+interface HeaderProps {
+    title: string;
+    filter?: boolean;
+}
+
+export const Header = ({ title, filter = false }: HeaderProps) => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
 
     const classNameButton = isFilterOpen
@@ -15,28 +20,30 @@ export const Header = () => {
     return (
         <div className='py-2 pr-4 mb-2'>
             <div className='flex items-center justify-between mb-4'>
-                <h2 className='text-xl font-semibold text-green-900'>Dashboard</h2>
+                <h2 className='text-xl font-semibold text-green-900'>{title}</h2>
                 <div className='flex items-center gap-6'>
-                    <div onClick={() => setIsFilterOpen(!isFilterOpen)}>
-                        <TooltipProvider>
-                            <Tooltip>
-                                <TooltipTrigger>
-                                    {isFilterOpen ? (
-                                        <div className='relative flex items-center bg-gray-200 rounded-full w-10 h-10 justify-center cursor-pointer'>
-                                            <Filter className={classNameButton} />
-                                        </div>
-                                    ) : (
-                                        <div className='relative flex items-center bg-transparent rounded-full w-10 h-10 justify-center cursor-pointer'>
-                                            <Filter className={classNameButton} />
-                                        </div>
-                                    )}
-                                </TooltipTrigger>
-                                <TooltipContent side='bottom'>
-                                    <span className='text-xs font-semibold text-gray-700'>Filtros</span>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
-                    </div>
+                    {filter && (
+                        <div onClick={() => setIsFilterOpen(!isFilterOpen)}>
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        {isFilterOpen ? (
+                                            <div className='relative flex items-center bg-gray-200 rounded-full w-10 h-10 justify-center cursor-pointer'>
+                                                <Filter className={classNameButton} />
+                                            </div>
+                                        ) : (
+                                            <div className='relative flex items-center bg-transparent rounded-full w-10 h-10 justify-center cursor-pointer'>
+                                                <Filter className={classNameButton} />
+                                            </div>
+                                        )}
+                                    </TooltipTrigger>
+                                    <TooltipContent side='bottom'>
+                                        <span className='text-xs font-semibold text-gray-700'>Filtros</span>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
+                        </div>
+                    )}
 
                     <TooltipProvider>
                         <Tooltip>
@@ -78,7 +85,11 @@ export const Header = () => {
                 </div>
             </div>
 
-            {isFilterOpen && <FilterComponent />}
+            {isFilterOpen && (
+                <div className='flex w-full flex-row flex-grow'>
+                    <FilterComponent />
+                </div>
+            )}
         </div>
     );
 };
