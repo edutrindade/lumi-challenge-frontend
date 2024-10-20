@@ -3,55 +3,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Zap } from 'lucide-react';
 import { ChartConfig, ChartContainer } from '@/components/ui/chart';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { useDashboardContext } from '@/context/dashboardContext';
 
 export const ChartEnergy = () => {
-    const chartData = [
-        {
-            month: 'JAN',
-            energyConsumption: 526,
-            compensatedEnergy: 120,
-        },
-        {
-            month: 'FEV',
-            energyConsumption: 780,
-            compensatedEnergy: 290,
-        },
-        {
-            month: 'MAR',
-            energyConsumption: 450,
-            compensatedEnergy: 130,
-        },
-        {
-            month: 'ABR',
-            energyConsumption: 600,
-            compensatedEnergy: 250,
-        },
-        {
-            month: 'MAI',
-            energyConsumption: 350,
-            compensatedEnergy: 100,
-        },
-        {
-            month: 'JUN',
-            energyConsumption: 300,
-            compensatedEnergy: 125,
-        },
-        {
-            month: 'JUL',
-            energyConsumption: 250,
-            compensatedEnergy: 100,
-        },
-        {
-            month: 'AGO',
-            energyConsumption: 200,
-            compensatedEnergy: 75,
-        },
-        {
-            month: 'SET',
-            energyConsumption: 350,
-            compensatedEnergy: 110,
-        },
-    ];
+    const { dataDashboard } = useDashboardContext();
+
+    const chartData = dataDashboard.map((item) => ({
+        month: item.month,
+        energyConsumption: item.totalEnergyConsumed,
+        compensatedEnergy: item.totalCompensated,
+    }));
 
     const chartConfig = {
         energyConsumption: {
@@ -65,7 +26,7 @@ export const ChartEnergy = () => {
     } satisfies ChartConfig;
 
     return (
-        <Card className='w-full md:w-1/2 md:max-w-[570px] shadow-md border-transparent'>
+        <Card className='w-full md:w-1/2 md:max-w-[600px] shadow-md border-transparent'>
             <CardHeader>
                 <div className='flex items-center justify-center'>
                     <CardTitle className='text-lg sm:text-xl text-gray-800'>Balanço Energético (kWh)</CardTitle>

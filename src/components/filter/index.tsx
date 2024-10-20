@@ -1,282 +1,77 @@
 'use client';
 import { useState } from 'react';
 import { Select } from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
-import { Calendar, User } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { convertMonth } from '@/utils/generic';
-import { Combobox } from '../combobox';
+import { useDashboardContext } from '@/context/dashboardContext';
 
 export const FilterComponent = () => {
-    const [selectedFilter, setSelectedFilter] = useState<string>('all');
-    const [clientNumber, setClientNumber] = useState<string>('');
-    const [selectedClient, setSelectedClient] = useState<string>('');
-    const [filteredClients, setFilteredClients] = useState<any>([]);
+    const { dataDashboard, monthSelected, setMonthSelected } = useDashboardContext();
+    const [selectedFilter, setSelectedFilter] = useState<string>(`${convertMonth(monthSelected?.month || 'JAN')} / 2024`);
 
-    const data = [
-        {
-            month: 'JAN',
-            year: 2024,
-            totalEnergyConsumed: 608.3,
-            totalCompensated: 458.3,
-            totalInvoicesValue: 174,
-            totalWithoutGD: 466.74199999999996,
-            economyGD: -223.34,
-            installationNumbers: ['7204076116', '7202210726'],
-            clients: [
-                {
-                    id: '59c91b40-3906-44ff-89e9-5d110a4d546d',
-                    name: 'JOSE MESALY FONSECA DE CARVALHO 52024156',
-                    number: '3001116735',
-                    cpfCnpj: '36.611.9**/****-**',
-                },
-                {
-                    id: 'c78bba3a-c28f-43d5-b03e-0b002adff774',
-                    name: 'SELFWAY TREINAMENTO PERSONALIZADO LTDA',
-                    number: '3001422762',
-                    cpfCnpj: '31.176.0**/****-**',
-                },
-            ],
-            variationTotalEnergyConsumed: 0,
-            variationCompensated: 0,
-            variationTotalInvoicesValue: 0,
-        },
-        {
-            month: 'FEV',
-            year: 2024,
-            totalEnergyConsumed: 401.94,
-            totalCompensated: 251.94,
-            totalInvoicesValue: 281.74,
-            totalWithoutGD: 1348.99,
-            economyGD: -1067.25,
-            installationNumbers: ['7204076116', '7202210726'],
-            clients: [
-                {
-                    id: '59c91b40-3906-44ff-89e9-5d110a4d546d',
-                    name: 'JOSE MESALY FONSECA DE CARVALHO 52024156',
-                    number: '3001116735',
-                    cpfCnpj: '36.611.9**/****-**',
-                },
-                {
-                    id: 'c78bba3a-c28f-43d5-b03e-0b002adff774',
-                    name: 'SELFWAY TREINAMENTO PERSONALIZADO LTDA',
-                    number: '3001422762',
-                    cpfCnpj: '31.176.0**/****-**',
-                },
-            ],
-            variationTotalEnergyConsumed: -33.92405063291139,
-            variationCompensated: -45.027274710888065,
-            variationTotalInvoicesValue: 61.91954022988506,
-        },
-        {
-            month: 'MAR',
-            year: 2024,
-            totalEnergyConsumed: 656.5,
-            totalCompensated: 506.5,
-            totalInvoicesValue: 305.98,
-            totalWithoutGD: 492.668,
-            economyGD: -246.828,
-            installationNumbers: ['7204076116', '7202210726'],
-            clients: [
-                {
-                    id: '59c91b40-3906-44ff-89e9-5d110a4d546d',
-                    name: 'JOSE MESALY FONSECA DE CARVALHO 52024156',
-                    number: '3001116735',
-                    cpfCnpj: '36.611.9**/****-**',
-                },
-                {
-                    id: 'c78bba3a-c28f-43d5-b03e-0b002adff774',
-                    name: 'SELFWAY TREINAMENTO PERSONALIZADO LTDA',
-                    number: '3001422762',
-                    cpfCnpj: '31.176.0**/****-**',
-                },
-            ],
-            variationTotalEnergyConsumed: 63.332835746628845,
-            variationCompensated: 101.03993014209733,
-            variationTotalInvoicesValue: 8.603677149144605,
-        },
-        {
-            month: 'ABR',
-            year: 2024,
-            totalEnergyConsumed: 628.34,
-            totalCompensated: 478.34,
-            totalInvoicesValue: 296.31,
-            totalWithoutGD: 476.98199999999997,
-            economyGD: -233.1,
-            installationNumbers: ['7204076116', '7202210726'],
-            clients: [
-                {
-                    id: '59c91b40-3906-44ff-89e9-5d110a4d546d',
-                    name: 'JOSE MESALY FONSECA DE CARVALHO 52024156',
-                    number: '3001116735',
-                    cpfCnpj: '36.611.9**/****-**',
-                },
-                {
-                    id: 'c78bba3a-c28f-43d5-b03e-0b002adff774',
-                    name: 'SELFWAY TREINAMENTO PERSONALIZADO LTDA',
-                    number: '3001422762',
-                    cpfCnpj: '31.176.0**/****-**',
-                },
-            ],
-            variationTotalEnergyConsumed: -4.289413556740285,
-            variationCompensated: -5.559723593287271,
-            variationTotalInvoicesValue: -3.160337276946211,
-        },
-        {
-            month: 'MAI',
-            year: 2024,
-            totalEnergyConsumed: 601.22,
-            totalCompensated: 451.22,
-            totalInvoicesValue: 298.21,
-            totalWithoutGD: 464.455,
-            economyGD: -219.891,
-            installationNumbers: ['7204076116', '7202210726'],
-            clients: [
-                {
-                    id: '59c91b40-3906-44ff-89e9-5d110a4d546d',
-                    name: 'JOSE MESALY FONSECA DE CARVALHO 52024156',
-                    number: '3001116735',
-                    cpfCnpj: '36.611.9**/****-**',
-                },
-                {
-                    id: 'c78bba3a-c28f-43d5-b03e-0b002adff774',
-                    name: 'SELFWAY TREINAMENTO PERSONALIZADO LTDA',
-                    number: '3001422762',
-                    cpfCnpj: '31.176.0**/****-**',
-                },
-            ],
-            variationTotalEnergyConsumed: -4.316134576821467,
-            variationCompensated: -5.669607392231456,
-            variationTotalInvoicesValue: 0.6412203435591026,
-        },
-        {
-            month: 'JUN',
-            year: 2024,
-            totalEnergyConsumed: 612.66,
-            totalCompensated: 462.66,
-            totalInvoicesValue: 297.48,
-            totalWithoutGD: 1396.54,
-            economyGD: -1099.06,
-            installationNumbers: ['7204076116', '7202210726'],
-            clients: [
-                {
-                    id: '59c91b40-3906-44ff-89e9-5d110a4d546d',
-                    name: 'JOSE MESALY FONSECA DE CARVALHO 52024156',
-                    number: '3001116735',
-                    cpfCnpj: '36.611.9**/****-**',
-                },
-                {
-                    id: 'c78bba3a-c28f-43d5-b03e-0b002adff774',
-                    name: 'SELFWAY TREINAMENTO PERSONALIZADO LTDA',
-                    number: '3001422762',
-                    cpfCnpj: '31.176.0**/****-**',
-                },
-            ],
-            variationTotalEnergyConsumed: 1.9027976447889192,
-            variationCompensated: 2.535348610433934,
-            variationTotalInvoicesValue: -0.24479393715836537,
-        },
-        {
-            month: 'JUL',
-            year: 2024,
-            totalEnergyConsumed: 560.5,
-            totalCompensated: 410.5,
-            totalInvoicesValue: 304.12,
-            totalWithoutGD: 1336.6799999999998,
-            economyGD: -1032.56,
-            installationNumbers: ['7204076116', '7202210726'],
-            clients: [
-                {
-                    id: '59c91b40-3906-44ff-89e9-5d110a4d546d',
-                    name: 'JOSE MESALY FONSECA DE CARVALHO 52024156',
-                    number: '3001116735',
-                    cpfCnpj: '36.611.9**/****-**',
-                },
-                {
-                    id: 'c78bba3a-c28f-43d5-b03e-0b002adff774',
-                    name: 'SELFWAY TREINAMENTO PERSONALIZADO LTDA',
-                    number: '3001422762',
-                    cpfCnpj: '31.176.0**/****-**',
-                },
-            ],
-            variationTotalEnergyConsumed: -8.51369438187575,
-            variationCompensated: -11.273937664807855,
-            variationTotalInvoicesValue: 2.2320828290977497,
-        },
-        {
-            month: 'AGO',
-            year: 2024,
-            totalEnergyConsumed: 568.02,
-            totalCompensated: 82.02,
-            totalInvoicesValue: 616.4000000000001,
-            totalWithoutGD: 1210.52,
-            economyGD: -591.04,
-            installationNumbers: ['7204076116', '7202210726'],
-            clients: [
-                {
-                    id: '59c91b40-3906-44ff-89e9-5d110a4d546d',
-                    name: 'JOSE MESALY FONSECA DE CARVALHO 52024156',
-                    number: '3001116735',
-                    cpfCnpj: '36.611.9**/****-**',
-                },
-                {
-                    id: 'c78bba3a-c28f-43d5-b03e-0b002adff774',
-                    name: 'SELFWAY TREINAMENTO PERSONALIZADO LTDA',
-                    number: '3001422762',
-                    cpfCnpj: '31.176.0**/****-**',
-                },
-            ],
-            variationTotalEnergyConsumed: 1.341659232827829,
-            variationCompensated: -80.01948842874543,
-            variationTotalInvoicesValue: 102.68315138761017,
-        },
-        {
-            month: 'SET',
-            year: 2024,
-            totalEnergyConsumed: 847.86,
-            totalCompensated: 428.86,
-            totalInvoicesValue: 634.26,
-            totalWithoutGD: 827.831,
-            economyGD: -235.03400000000002,
-            installationNumbers: ['7204076116', '7202210726', '7206096089'],
-            clients: [
-                {
-                    id: '59c91b40-3906-44ff-89e9-5d110a4d546d',
-                    name: 'JOSE MESALY FONSECA DE CARVALHO 52024156',
-                    number: '3001116735',
-                    cpfCnpj: '36.611.9**/****-**',
-                },
-                {
-                    id: 'c78bba3a-c28f-43d5-b03e-0b002adff774',
-                    name: 'SELFWAY TREINAMENTO PERSONALIZADO LTDA',
-                    number: '3001422762',
-                    cpfCnpj: '31.176.0**/****-**',
-                },
-                {
-                    id: '28dd83db-b969-4bec-92cd-ae5fe91b41f6',
-                    name: 'EDUARDO AUGUSTO COSTA TRINDADE',
-                    number: '3010089099',
-                    cpfCnpj: '097.6**.***-**',
-                },
-            ],
-            variationTotalEnergyConsumed: 49.26587092003803,
-            variationCompensated: 422.8724701292368,
-            variationTotalInvoicesValue: 2.897469175859815,
-        },
-    ];
-
-    const clients = data
+    const clients = dataDashboard
         .map((item) => item.clients)
         .flat()
         .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id));
 
-    const availableMonths = data.map((item) => convertMonth(item.month) + ` / ${item.year}`);
+    const availableMonths = dataDashboard.map((item) => convertMonth(item.month) + ` / ${item.year || '2024'}`);
+
+    const calculateTotals = () => {
+        const totals = dataDashboard.reduce(
+            (acc, item) => {
+                acc.totalEnergyConsumed += item.totalEnergyConsumed;
+                acc.totalCompensated += item.totalCompensated;
+                acc.totalInvoicesValue += item.totalInvoicesValue;
+                acc.clientsCount += item.clients.length;
+                return acc;
+            },
+            {
+                totalEnergyConsumed: 0,
+                totalCompensated: 0,
+                totalInvoicesValue: 0,
+                clientsCount: 0,
+            }
+        );
+
+        return totals;
+    };
+
+    const totals = calculateTotals();
+
+    const handleSelectPeriodChange = (value: string) => {
+        if (value === 'all') {
+            setMonthSelected({
+                ...monthSelected,
+                month: 'all',
+                year: '2024',
+                totalCompensated: Number(totals.totalCompensated?.toFixed(2)),
+                totalEnergyConsumed: Number(totals.totalEnergyConsumed?.toFixed(2)),
+                totalInvoicesValue: Number(totals.totalInvoicesValue?.toFixed(2)),
+                totalWithoutGD: 0,
+                economyGD: 0,
+                installationNumbers: monthSelected?.installationNumbers || [],
+                clients: clients,
+                variationTotalEnergyConsumed: 0,
+                variationCompensated: 0,
+                variationTotalInvoicesValue: 0,
+            });
+            setSelectedFilter('all');
+            return;
+        }
+
+        const [month, year] = value.split(' / ');
+        const monthAbbreviation = month?.slice(0, 3)?.toUpperCase();
+        const filteredData = dataDashboard.filter((item) => item.month === monthAbbreviation && item.year === year);
+        setMonthSelected(filteredData[0]);
+        setSelectedFilter(value);
+    };
 
     return (
-        <div className='flex flex-col gap-4 md:flex-row'>
+        <div className='flex flex-col gap-4 md:flex-row '>
             <div className='flex flex-col gap-4 md:flex-row justify-between w-full'>
                 <div className='flex items-center md:mr-4 flex-grow'>
-                    <Select value={selectedFilter} onValueChange={setSelectedFilter}>
+                    <Select value={selectedFilter} onValueChange={handleSelectPeriodChange}>
                         <SelectTrigger className='border-transparent shadow-md rounded-md p-2 w-full md:w-48 focus:outline-none focus:ring-0 outline-none ring-0'>
                             <Calendar className='mr-2 text-gray-400' />
                             <SelectValue />
@@ -292,12 +87,6 @@ export const FilterComponent = () => {
                             ))}
                         </SelectContent>
                     </Select>
-                </div>
-
-                <div className='flex items-center flex-grow'>
-                    <div className='flex items-center md:mr-4'>
-                        <Combobox selectedItem={selectedClient} setSelectedItem={setSelectedClient} data={clients} label='cliente' />
-                    </div>
                 </div>
             </div>
         </div>

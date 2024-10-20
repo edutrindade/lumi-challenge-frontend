@@ -2,7 +2,7 @@
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { LayoutDashboard, PanelBottom, FileText, Zap, Settings2, StepBack, StepForward } from 'lucide-react';
+import { LayoutDashboard, PanelBottom, FileText, StepBack, StepForward } from 'lucide-react';
 import Image from 'next/image';
 
 import LumiLogo from '@/assets/lumi-logo.svg';
@@ -64,22 +64,6 @@ export const Sidebar = () => {
                                 )}
                             </Tooltip>
                         </TooltipProvider>
-
-                        {/* <TooltipProvider>
-                            <Tooltip>
-                                <TooltipTrigger>
-                                    <Link href='#' className='flex items-center gap-4 text-muted-foreground hover:text-green-300 text-white'>
-                                        <Settings2 className='w-5 h-5' />
-                                        {isMenuOpen && <span className='text-sm font-semibold'>Configurações</span>}
-                                    </Link>
-                                </TooltipTrigger>
-                                {!isMenuOpen && (
-                                    <TooltipContent side='right'>
-                                        <span className='text-xs font-semibold text-gray-700'>Configurações</span>
-                                    </TooltipContent>
-                                )}
-                            </Tooltip>
-                        </TooltipProvider> */}
                     </div>
                 </nav>
 
@@ -140,15 +124,6 @@ export const Sidebar = () => {
                                         <FileText className='w-5 h-5 transition-all' />
                                         Faturas
                                     </Link>
-
-                                    {/* <Link
-                                        href='#'
-                                        className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-green-300 text-white'
-                                        prefetch={false}
-                                    >
-                                        <Settings2 className='w-5 h-5 transition-all' />
-                                        Configurações
-                                    </Link> */}
                                 </nav>
                             </SheetContent>
                         </Sheet>

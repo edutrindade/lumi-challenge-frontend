@@ -86,7 +86,7 @@ export const Header = ({ title, filter = false }: HeaderProps) => {
             </div>
 
             {isFilterOpen && (
-                <div className='flex w-full flex-row flex-grow'>
+                <div className='flex flex-row absolute'>
                     <FilterComponent />
                 </div>
             )}

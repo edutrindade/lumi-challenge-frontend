@@ -4,55 +4,16 @@ import { ChartArea } from 'lucide-react';
 import { ChartConfig, ChartContainer } from '@/components/ui/chart';
 import { Area, AreaChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { formatCurrency } from '@/utils/generic';
+import { useDashboardContext } from '@/context/dashboardContext';
 
 export const ChartFinancial = () => {
-    const chartData = [
-        {
-            month: 'JAN',
-            totalValue: 350,
-            gdrSavings: 200,
-        },
-        {
-            month: 'FEV',
-            totalValue: 320,
-            gdrSavings: 150,
-        },
-        {
-            month: 'MAR',
-            totalValue: 280,
-            gdrSavings: 100,
-        },
-        {
-            month: 'ABR',
-            totalValue: 350,
-            gdrSavings: 145,
-        },
-        {
-            month: 'MAI',
-            totalValue: 300,
-            gdrSavings: 250,
-        },
-        {
-            month: 'JUN',
-            totalValue: 270,
-            gdrSavings: 120,
-        },
-        {
-            month: 'JUL',
-            totalValue: 290,
-            gdrSavings: 200,
-        },
-        {
-            month: 'AGO',
-            totalValue: 310,
-            gdrSavings: 150,
-        },
-        {
-            month: 'SET',
-            totalValue: 140,
-            gdrSavings: 60,
-        },
-    ];
+    const { dataDashboard } = useDashboardContext();
+
+    const chartData = dataDashboard.map((item) => ({
+        month: item.month,
+        totalValue: item.totalWithoutGD,
+        gdrSavings: Math.abs(item.economyGD),
+    }));
 
     const chartConfig = {
         totalValue: {
@@ -66,7 +27,7 @@ export const ChartFinancial = () => {
     } satisfies ChartConfig;
 
     return (
-        <Card className='w-full md:w-1/2 md:max-w-[570px] shadow-md border-transparent'>
+        <Card className='w-full md:w-1/2 md:max-w-[600px] shadow-md border-transparent'>
             <CardHeader>
                 <div className='flex items-center justify-center'>
                     <CardTitle className='text-lg sm:text-xl text-gray-800'>Resultados Financeiros (R$)</CardTitle>
