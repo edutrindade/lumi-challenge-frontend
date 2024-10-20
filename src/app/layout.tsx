@@ -30,7 +30,7 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} ${cn('min-h-screeen', 'font-sans', 'text-foreground', 'bg-background', 'antialiased')}`}
+                className={`${geistSans.variable} ${geistMono.variable} ${cn('min-h-screeen', 'font-sans', 'text-foreground', 'bg-gray-100', 'antialiased')}`}
             >
                 <SidebarProvider>
                     <Sidebar />
