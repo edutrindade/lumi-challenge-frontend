@@ -55,8 +55,6 @@ export default function Dashboard() {
 
     const { totalEnergyConsumed, totalCompensated, totalInvoicesValue, clients } = data;
 
-    console.log('monthSelected', monthSelected);
-
     return (
         <main className={`p-4 transition-all duration-300 ${isMenuOpen ? 'sm:ml-48 ml-0' : 'ml-0 sm:ml-16'}`}>
             <Header title='Dashboard' filter />
