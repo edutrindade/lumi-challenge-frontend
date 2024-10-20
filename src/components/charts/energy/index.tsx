@@ -55,7 +55,7 @@ export const ChartEnergy = () => {
 
     const chartConfig = {
         energyConsumption: {
-            label: 'Consumo de Energia Elétrica',
+            label: 'Energia Consumida',
             color: '#6DC19B',
         },
         compensatedEnergy: {
