@@ -36,7 +36,7 @@ export const Sidebar = () => {
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger>
-                                    <Link href='#' className='flex items-center gap-4 text-muted-foreground hover:text-green-300 text-white'>
+                                    <Link href='/' className='flex items-center gap-4 text-muted-foreground hover:text-green-300 text-white'>
                                         <LayoutDashboard className='w-5 h-5' />
                                         {isMenuOpen && <span className='text-sm font-semibold'>Dashboard</span>}
                                     </Link>
@@ -52,7 +52,7 @@ export const Sidebar = () => {
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger>
-                                    <Link href='#' className='flex items-center gap-4 text-muted-foreground hover:text-green-300 text-white'>
+                                    <Link href='/invoices' className='flex items-center gap-4 text-muted-foreground hover:text-green-300 text-white'>
                                         <FileText className='w-5 h-5' />
                                         {isMenuOpen && <span className='text-sm font-semibold'>Faturas</span>}
                                     </Link>
@@ -65,7 +65,7 @@ export const Sidebar = () => {
                             </Tooltip>
                         </TooltipProvider>
 
-                        <TooltipProvider>
+                        {/* <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger>
                                     <Link href='#' className='flex items-center gap-4 text-muted-foreground hover:text-green-300 text-white'>
@@ -79,7 +79,7 @@ export const Sidebar = () => {
                                     </TooltipContent>
                                 )}
                             </Tooltip>
-                        </TooltipProvider>
+                        </TooltipProvider> */}
                     </div>
                 </nav>
 
@@ -124,7 +124,7 @@ export const Sidebar = () => {
                                     </Link>
 
                                     <Link
-                                        href='#'
+                                        href='/'
                                         className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-green-300 text-white'
                                         prefetch={false}
                                     >
@@ -133,7 +133,7 @@ export const Sidebar = () => {
                                     </Link>
 
                                     <Link
-                                        href='#'
+                                        href='/invoices'
                                         className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-green-300 text-white'
                                         prefetch={false}
                                     >
@@ -141,14 +141,14 @@ export const Sidebar = () => {
                                         Faturas
                                     </Link>
 
-                                    <Link
+                                    {/* <Link
                                         href='#'
                                         className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-green-300 text-white'
                                         prefetch={false}
                                     >
                                         <Settings2 className='w-5 h-5 transition-all' />
                                         Configurações
-                                    </Link>
+                                    </Link> */}
                                 </nav>
                             </SheetContent>
                         </Sheet>
