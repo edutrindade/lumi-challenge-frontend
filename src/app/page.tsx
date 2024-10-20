@@ -12,7 +12,7 @@ export default function Dashboard() {
 
     return (
         <main className={`p-4 transition-all duration-300 ${isMenuOpen ? 'sm:ml-48 ml-0' : 'ml-0 sm:ml-16'}`}>
-            <Header />
+            <Header title='Dashboard' filter />
             <section className='grid grid-cols-1 gap-4 lg:grid-cols-4'>
                 <CardComponent
                     title='Consumo de Energia Elétrica'
