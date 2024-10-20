@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
+import Provider from '@/utils/providers';
 import './globals.css';
 
 import { Sidebar } from '@/components/sidebar';
 import { SidebarProvider } from '@/context/sidebarContext';
+import { DashboardProvider } from '@/context/dashboardContext';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -32,10 +34,14 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} ${cn('min-h-screeen', 'font-sans', 'text-foreground', 'bg-gray-100', 'antialiased')}`}
             >
-                <SidebarProvider>
-                    <Sidebar />
-                    {children}
-                </SidebarProvider>
+                <Provider>
+                    <SidebarProvider>
+                        <DashboardProvider>
+                            <Sidebar />
+                            {children}
+                        </DashboardProvider>
+                    </SidebarProvider>
+                </Provider>
             </body>
         </html>
     );
