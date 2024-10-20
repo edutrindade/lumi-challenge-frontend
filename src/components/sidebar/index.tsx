@@ -1,5 +1,4 @@
 'use client';
-import { useState } from 'react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -30,24 +29,57 @@ export const Sidebar = () => {
                                 isMenuOpen ? `max-w-full h-auto px-4 transition-opacity duration-300` : `max-w-full h-auto transition-opacity duration-300`
                             }
                         />
-                        <span className='sr-only'>Dashboard Avatar</span>
+                        <span className='sr-only'>Logo</span>
                     </Link>
 
                     <div className='mt-4 gap-4 flex flex-col px-4'>
-                        <Link href='#' className='flex items-center gap-4 text-muted-foreground hover:text-green-300 text-white'>
-                            <LayoutDashboard className='w-5 h-5' />
-                            {isMenuOpen && <span>Dashboard</span>}
-                        </Link>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    <Link href='#' className='flex items-center gap-4 text-muted-foreground hover:text-green-300 text-white'>
+                                        <LayoutDashboard className='w-5 h-5' />
+                                        {isMenuOpen && <span className='text-sm font-semibold'>Dashboard</span>}
+                                    </Link>
+                                </TooltipTrigger>
+                                {!isMenuOpen && (
+                                    <TooltipContent side='right'>
+                                        <span className='text-xs font-semibold text-gray-700'>Dashboard</span>
+                                    </TooltipContent>
+                                )}
+                            </Tooltip>
+                        </TooltipProvider>
 
-                        <Link href='#' className='flex items-center gap-4 text-muted-foreground hover:text-green-300 text-white'>
-                            <FileText className='w-5 h-5' />
-                            {isMenuOpen && <span>Faturas</span>}
-                        </Link>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    <Link href='#' className='flex items-center gap-4 text-muted-foreground hover:text-green-300 text-white'>
+                                        <FileText className='w-5 h-5' />
+                                        {isMenuOpen && <span className='text-sm font-semibold'>Faturas</span>}
+                                    </Link>
+                                </TooltipTrigger>
+                                {!isMenuOpen && (
+                                    <TooltipContent side='right'>
+                                        <span className='text-xs font-semibold text-gray-700'>Faturas</span>
+                                    </TooltipContent>
+                                )}
+                            </Tooltip>
+                        </TooltipProvider>
 
-                        <Link href='#' className='flex items-center gap-4 text-muted-foreground hover:text-green-300 text-white'>
-                            <Settings2 className='w-5 h-5' />
-                            {isMenuOpen && <span>Configurações</span>}
-                        </Link>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    <Link href='#' className='flex items-center gap-4 text-muted-foreground hover:text-green-300 text-white'>
+                                        <Settings2 className='w-5 h-5' />
+                                        {isMenuOpen && <span className='text-sm font-semibold'>Configurações</span>}
+                                    </Link>
+                                </TooltipTrigger>
+                                {!isMenuOpen && (
+                                    <TooltipContent side='right'>
+                                        <span className='text-xs font-semibold text-gray-700'>Configurações</span>
+                                    </TooltipContent>
+                                )}
+                            </Tooltip>
+                        </TooltipProvider>
                     </div>
                 </nav>
 
@@ -65,45 +97,55 @@ export const Sidebar = () => {
                                     <span className='sr-only'>Abrir / fechar menu</span>
                                 </Button>
                             </TooltipTrigger>
-                            <TooltipContent side='top'>{isMenuOpen ? 'Recolher' : 'Expandir'}</TooltipContent>
+                            <TooltipContent side='top'>
+                                <span className='text-xs font-semibold text-gray-700'>{isMenuOpen ? 'Recolher' : 'Expandir'}</span>
+                            </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
                 </nav>
             </aside>
 
-            <div className='sm:hidden flex w-full flex-col bg-muted/40'>
+            <div className='sm:hidden flex w-full flex-col bg-[#02231C]'>
                 <div className='flex flex-col sm:gap-4 sm:pl-14'>
-                    <header className='sticky top-0 z-30 flex h-14 items-center px-4 border-b bg-background gap-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6'>
+                    <header className='sticky top-0 z-30 flex h-14 items-center px-4 border-b border-[#02231C] bg-[#02231C] gap-4 sm:static sm:h-auto sm:border-0 sm:bg-[#02231C] sm:px-6'>
                         <Sheet>
                             <SheetTrigger asChild>
-                                <Button size='icon' variant='outline' className='sm:hidden'>
+                                <Button size='icon' variant='outline' className='sm:hidden text-white bg-transparent'>
                                     <PanelBottom className='w-5 h-5' />
                                     <span className='sr-only'>Abrir / fechar menu</span>
                                 </Button>
                             </SheetTrigger>
 
-                            <SheetContent side='left' className='sm:max-w-xs'>
+                            <SheetContent side='left' className='sm:max-w-xs bg-[#02231C] text-white'>
                                 <nav className='grid gap-6 text-lg font-medium'>
-                                    <Link
-                                        href='#'
-                                        className='flex w-10 h-10 bg-green-800 rounded-full text-lg items-center justify-center text-primary-foreground md:text-base gap-2'
-                                        prefetch={false}
-                                    >
-                                        <Zap className='w-5 h-5' />
+                                    <Link href='https://www.labs-lumi.com.br/' prefetch={false} target='_blank' rel='noopener noreferrer'>
+                                        <Image src={LumiLogo} alt='Lumi Logo' className={'max-w-full h-auto px-4 transition-opacity duration-300'} />
                                         <span className='sr-only'>Logo</span>
                                     </Link>
 
-                                    <Link href='#' className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground' prefetch={false}>
+                                    <Link
+                                        href='#'
+                                        className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-green-300 text-white'
+                                        prefetch={false}
+                                    >
                                         <LayoutDashboard className='w-5 h-5 transition-all' />
                                         Dashboard
                                     </Link>
 
-                                    <Link href='#' className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground' prefetch={false}>
+                                    <Link
+                                        href='#'
+                                        className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-green-300 text-white'
+                                        prefetch={false}
+                                    >
                                         <FileText className='w-5 h-5 transition-all' />
                                         Faturas
                                     </Link>
 
-                                    <Link href='#' className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground' prefetch={false}>
+                                    <Link
+                                        href='#'
+                                        className='flex items-center gap-4 px-2.5 text-muted-foreground hover:text-green-300 text-white'
+                                        prefetch={false}
+                                    >
                                         <Settings2 className='w-5 h-5 transition-all' />
                                         Configurações
                                     </Link>
@@ -111,7 +153,7 @@ export const Sidebar = () => {
                             </SheetContent>
                         </Sheet>
 
-                        <h2 className='text-lg font-semibold text-muted-foreground'>Menu</h2>
+                        <h2 className='text-lg font-semibold text-white'>Menu</h2>
                     </header>
                 </div>
             </div>
