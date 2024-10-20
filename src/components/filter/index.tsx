@@ -5,11 +5,12 @@ import { Input } from '@/components/ui/input';
 import { Calendar, User } from 'lucide-react';
 import { SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { convertMonth } from '@/utils/generic';
+import { Combobox } from '../combobox';
 
 export const FilterComponent = () => {
     const [selectedFilter, setSelectedFilter] = useState<string>('all');
     const [clientNumber, setClientNumber] = useState<string>('');
-    const [selectedClient, setSelectedClient] = useState<string>('all');
+    const [selectedClient, setSelectedClient] = useState<string>('');
     const [filteredClients, setFilteredClients] = useState<any>([]);
 
     const data = [
@@ -270,25 +271,10 @@ export const FilterComponent = () => {
         .filter((item, index, self) => index === self.findIndex((t) => t.id === item.id));
 
     const availableMonths = data.map((item) => convertMonth(item.month) + ` / ${item.year}`);
-    const availableYears = new Set(data.map((item) => item.year));
-
-    const handleClientSearch = (e: any) => {
-        const value = e.target.value;
-        setClientNumber(value);
-
-        if (value) {
-            const filtered = clients.filter((client) => client.number.includes(value));
-            setFilteredClients(filtered);
-        } else {
-            setFilteredClients([]);
-        }
-    };
-
-    console.log('filteredClients', filteredClients);
 
     return (
         <div className='flex flex-col gap-4 md:flex-row'>
-            <div className='flex flex-col gap-4 md:flex-row'>
+            <div className='flex flex-col gap-4 md:flex-row justify-between w-full'>
                 <div className='flex items-center md:mr-4 flex-grow'>
                     <Select value={selectedFilter} onValueChange={setSelectedFilter}>
                         <SelectTrigger className='border-transparent shadow-md rounded-md p-2 w-full md:w-48 focus:outline-none focus:ring-0 outline-none ring-0'>
@@ -310,50 +296,7 @@ export const FilterComponent = () => {
 
                 <div className='flex items-center flex-grow'>
                     <div className='flex items-center md:mr-4'>
-                        <Select value={selectedClient} onValueChange={setSelectedClient}>
-                            <SelectTrigger className='border-transparent shadow-md rounded-md p-2 w-full justify-start focus:outline-none focus:ring-0 outline-none ring-0'>
-                                <User className='mr-2 text-gray-400' />
-                                <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value='all'>
-                                    <p className='text-xs text-gray-600'>Todos</p>
-                                </SelectItem>
-                                {clients?.map((client) => (
-                                    <SelectItem key={client.id} value={`${client.id}`}>
-                                        <p className='text-xs text-gray-600'>
-                                            {client.number} - {client.name}
-                                        </p>
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-                    </div>
-                </div>
-
-                <div className='flex items-center'>
-                    <div className='relative flex-grow'>
-                        <Input
-                            type='text'
-                            value={clientNumber}
-                            onChange={(e) => {
-                                setClientNumber(e.target.value);
-                                handleClientSearch(e);
-                            }}
-                            placeholder='Nº do Cliente'
-                            className='border-transparent shadou-md rounded-lg px-4 py-2 w-96 justify-start focus:outline-none focus:ring-0 outline-none ring-0'
-                        />
-                        {filteredClients.length > 0 && (
-                            <ul className='absolute left-0 w-full bg-white border border-gray-300 rounded-lg mt-1 z-10'>
-                                {filteredClients.map((client: any) => (
-                                    <li key={client.id} className='px-4 py-2 hover:bg-gray-200 cursor-pointer' onClick={() => setSelectedClient(client.id)}>
-                                        <p className='text-xs text-gray-600'>
-                                            {client.number} - {client.name}
-                                        </p>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
+                        <Combobox selectedItem={selectedClient} setSelectedItem={setSelectedClient} data={clients} label='cliente' />
                     </div>
                 </div>
             </div>
