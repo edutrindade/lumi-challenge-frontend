@@ -59,7 +59,7 @@ export default function Invoices() {
         <main className={`p-4 transition-all duration-300 ${isMenuOpen ? 'sm:ml-48 ml-0' : 'ml-0 sm:ml-16'}`}>
             <Header title='Faturas' />
 
-            <div className='flex justify-between items-center mb-4'>
+            <div className='flex flex-col sm:flex-row justify-between items-center mb-4 space-y-4 sm:space-y-0 sm:space-x-4'>
                 <Combobox selectedItem={selectedClient} setSelectedItem={setSelectedClient} data={data} label='cliente' />
 
                 <Select onValueChange={setSelectedYear} defaultValue={currentYear}>

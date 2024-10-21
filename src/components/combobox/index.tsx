@@ -22,7 +22,7 @@ export function Combobox({ selectedItem, setSelectedItem, data, label }: Combobo
     return (
         <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-                <Button variant='outline' role='combobox' aria-expanded={open} className='w-[400px] justify-between text-xs text-gray-600 shadow-md'>
+                <Button variant='outline' role='combobox' aria-expanded={open} className='w-full md:w-[400px] justify-between text-xs text-gray-600 shadow-md'>
                     <div className='flex flex-row items-center'>
                         <User className='mr-2 text-gray-400' />
                         {selectedItem === 'all'
@@ -34,7 +34,7 @@ export function Combobox({ selectedItem, setSelectedItem, data, label }: Combobo
                     <ChevronDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className='w-[400px] p-0'>
+            <PopoverContent className='w-full md:w-[400px] p-0'>
                 <Command>
                     <CommandInput placeholder='Buscar cliente...' value={searchValue} onValueChange={setSearchValue} />
                     <CommandList>
