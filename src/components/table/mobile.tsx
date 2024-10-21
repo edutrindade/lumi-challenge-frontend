@@ -26,7 +26,7 @@ const DataTableMobile = ({ filteredData }: DataTableProps) => {
         <div className='flex flex-col gap-4'>
             {filteredData.length > 0 ? (
                 filteredData.map((row, index) => (
-                    <Card className='p-6 rounded-lg shadow-lg bg-white border border-gray-300'>
+                    <Card key={index.toString()} className='p-6 rounded-lg shadow-lg bg-white border border-gray-300'>
                         <p className='text-sm font-bold text-green-800 mb-2'>{row.name.toUpperCase()}</p>
                         <div className='flex justify-between items-center mb-4'>
                             <p className='text-sm text-gray-700'>
@@ -41,6 +41,7 @@ const DataTableMobile = ({ filteredData }: DataTableProps) => {
                         <div className='mt-4'>
                             <h3 className='text-lg font-semibold text-gray-800'>Faturas</h3>
                             {MONTHS.map((month, i) => {
+                                /* eslint-disable @typescript-eslint/no-explicit-any */
                                 const monthData = row.months.find((m: any) => m.month === month);
                                 return (
                                     <div key={i} className='flex items-center justify-between my-2 border-b border-gray-200 pb-2'>

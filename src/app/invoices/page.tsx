@@ -2,9 +2,8 @@
 import { useState } from 'react';
 import { Header } from '@/components/header';
 import { useSidebar } from '@/context/sidebarContext';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from '@/components/ui/select';
-import { Calendar, FileText } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { Combobox } from '@/components/combobox';
 import { fetchInvoicesLibrary } from '@/services/invoices';
 import { useQuery } from '@tanstack/react-query';
@@ -14,6 +13,7 @@ import { ErrorComponent } from '@/components/error';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import DataTableMobile from '@/components/table/mobile';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const fetchLibraryData = async (): Promise<any[]> => {
     const response = await fetchInvoicesLibrary();
     return response;
@@ -49,7 +49,9 @@ export default function Invoices() {
     if (error) return <ErrorComponent />;
 
     const filteredData = data.filter((row) => {
+        /* eslint-disable @typescript-eslint/no-explicit-any */
         const yearFilteredMonths = row.months.filter((month: any) => month.year.toString() === selectedYear);
+        /* eslint-disable @typescript-eslint/no-explicit-any */
         return (selectedClient === 'all' || row.name.includes(selectedClient)) && yearFilteredMonths.some((month: any) => month.available);
     });
 

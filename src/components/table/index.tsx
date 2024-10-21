@@ -52,6 +52,7 @@ const DataTable = ({ filteredData }: DataTableProps) => {
                         <TableCell className='px-4 py-2 text-xs'>{row.installationNumber}</TableCell>
                         <TableCell className='px-4 py-2 text-xs'>{row.distributor}</TableCell>
                         {MONTHS.map((month, i) => {
+                            /* eslint-disable @typescript-eslint/no-explicit-any */
                             const monthData = row.months.find((m: any) => m.month === month);
                             return (
                                 <TableCell key={i} className='px-4 py-2 text-center'>
