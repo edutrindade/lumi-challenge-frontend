@@ -78,7 +78,7 @@ npm run lint
 
 ## Estrutura da Aplicação
 
-A aplicação é estruturada em componentes e páginas, permitindo uma navegação fluida e uma experiência de usuário otimizada.
+A aplicação é estruturada em componentes e páginas, permitindo uma navegação fluida e uma experiência de usuário otimizada. Pode ser visualizada clicando [aqui](https://lumi-challenge-frontend.vercel.app/).
 
 ### Estrutura de Páginas
 
@@ -92,10 +92,8 @@ A aplicação é estruturada em componentes e páginas, permitindo uma navegaç�
 
 ![Lumi Dashboard](https://iili.io/23sbtn9.png)     ![Lumi Mobile](https://iili.io/23sZ0hX.png)
 
-    
-
 ## Sobre o Desenvolvedor
 
 Este projeto foi desenvolvido por mim,  **Eduardo Trindade** . Sou desenvolvedor full stack com foco em React Native, ReactJs e Node.js. Estou sempre buscando entregar soluções eficientes e robustas. Caso tenha dúvidas ou sugestões sobre este projeto, fique à vontade para entrar em contato 🙂.
 
-[www.edutrindade.com.br](https://www.edutrindade.com.br)
+[Meu Portfolio](https://edutrindade.com.br)
